@@ -1,0 +1,77 @@
+image: docker:18
+
+stages:
+  - npm
+  - build
+  - push
+  - deploy
+
+Npm Build:
+  stage: npm
+  tags:
+    - germany
+  only:
+    - main
+  image: node:16-alpine
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 3 days
+    when: always
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - yarn install --ignore-optional --frozen-lockfile --non-interactive
+
+Build Production:
+  stage: build
+  tags:
+    - germany
+  only:
+    - main
+  before_script:
+    - echo -n 'z@SM*tbPFq5qvNgR' | docker login --username root --password-stdin https://reg.naprocat.com
+  script:
+    - echo "${ENV_PRODUCTION}" > "$(pwd)/.env"
+    - docker pull ${CI_REGISTRY_IMAGE}:latest || true
+    - >
+      docker build
+      --pull
+      --build-arg VCS_REF=${CI_COMMIT_SHA}
+      --build-arg VCS_URL=${CI_PROJECT_URL}
+      --cache-from ${CI_REGISTRY_IMAGE}:latest
+      --tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+      .
+    - docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+
+Push Production:
+  stage: push
+  cache: { }
+  dependencies: [ ]
+  tags:
+    - germany
+  only:
+    - main
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - echo -n 'z@SM*tbPFq5qvNgR' | docker login --username root --password-stdin https://reg.naprocat.com
+  script:
+    - docker pull ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+    - docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA} ${CI_REGISTRY_IMAGE}:latest
+    - docker push ${CI_REGISTRY_IMAGE}:latest
+
+Deploy Production:
+  stage: deploy
+  cache: { }
+  dependencies: [ ]
+  image: curlimages/curl:7.78.0
+  tags:
+    - germany
+  only:
+    - main
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - curl -X POST ${SERVICE_DEPLOY_TOKEN}
