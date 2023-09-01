@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'NUiButton',
+  name: 'ButtonComponent',
   props: {
     type: {
       type: String,
