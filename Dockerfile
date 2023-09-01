@@ -7,7 +7,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # устанавливаем зависимости проекта
-RUN yarn install
+RUN yarn install --ignore-optional --frozen-lockfile --non-interactive
+
 
 # копируем файлы и каталоги проекта в текущий рабочий каталог (т.е. в каталог 'app')
 COPY . .
