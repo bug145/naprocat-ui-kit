@@ -26,6 +26,7 @@ coverage
 .grunt
 
 .nuxt-storybook
+storybook-static
 
 # Bower dependency directory (https://bower.io/)
 bower_components
