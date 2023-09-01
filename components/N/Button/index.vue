@@ -37,7 +37,6 @@ export default {
           'dark',
           'outline-primary',
           'link',
-          'outline-link',
         ].includes(value);
       },
     },
@@ -71,24 +70,25 @@ export default {
   },
   computed: {
     classList() {
-      const classList = ['button'];
+      const baseClass = 'n-button';
+      const classList = [baseClass];
       if (this.variant) {
-        classList.push(`variant--${this.variant}`);
+        classList.push(`${baseClass}--variant--${this.variant}`);
       }
       if (this.size) {
-        classList.push(`size--${this.size}`);
+        classList.push(`${baseClass}--size--${this.size}`);
       }
       if (this.rounded) {
-        classList.push(`rounded--${this.rounded}`);
+        classList.push(`${baseClass}--rounded--${this.rounded}`);
       }
       if (this.textVariant) {
-        classList.push(`text-variant--${this.textVariant}`);
+        classList.push(`${baseClass}--text-variant--${this.textVariant}`);
       }
       if (this.block) {
-        classList.push('block');
+        classList.push(`${baseClass}--block`);
       }
       if (this.disabled) {
-        classList.push('disabled');
+        classList.push(`${baseClass}--disabled`);
       }
       return classList;
     },
@@ -97,7 +97,6 @@ export default {
         this.variant === 'secondary'
         || this.variant === 'gray'
         || this.variant === 'link'
-        || this.variant === 'outline-link'
         || this.variant === 'outline-primary'
       );
     },
@@ -113,21 +112,30 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.button {
+.n-button {
   width: auto;
   white-space: nowrap;
   position: relative;
+  border: none;
+  cursor: pointer;
+  outline-color: var(--primary-color, #00bfff);
+  outline-style: solid;
+  outline-width: 0;
 
-  &.block {
+  &:hover:not([disabled]) {
+    outline-width: 2px;
+  }
+
+  &--block {
     display: block;
     width: 100%;
   }
 
-  &.disabled {
+  &--disabled {
     opacity: 0.5;
   }
 
-  &.size {
+  &--size {
     &--lg {
       height: 60px;
       padding: 0 20px;
@@ -156,7 +164,7 @@ export default {
     }
   }
 
-  &.variant {
+  &--variant {
     &--primary {
       background: #4daaff;
       color: #ffffff;
@@ -179,12 +187,7 @@ export default {
 
     &--link {
       background: transparent;
-      color: rgba(40, 48, 57, 0.5);
-    }
-
-    &--outline-link {
       height: 24px;
-      background: transparent;
       color: rgba(40, 48, 57, 0.5);
       text-decoration-line: underline;
     }
@@ -195,7 +198,7 @@ export default {
     }
   }
 
-  &.rounded {
+  &--rounded {
     &--xl {
       border-radius: 70px;
     }
@@ -221,7 +224,7 @@ export default {
     }
   }
 
-  &.text-variant {
+  &--text-variant {
     &--black {
       color: #333333;
     }

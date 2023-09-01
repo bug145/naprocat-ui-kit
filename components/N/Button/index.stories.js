@@ -1,7 +1,7 @@
 import NButton from './index.vue';
 
 export default {
-  title: 'NaprocatUI/Button',
+  title: 'Components/Button',
   component: NButton,
 };
 
@@ -24,7 +24,6 @@ export const Default = {
     buttonText: 'Текст кнопки',
   },
   parameters: {
-    layout: 'centered',
     docs: {
       source: {
         type: 'dynamic',
@@ -45,7 +44,7 @@ export const Default = {
     variant: {
       control: {
         type: 'inline-radio',
-        options: ['primary', 'secondary', 'success', 'gray', 'dark', 'outline-primary', 'link', 'outline-link'],
+        options: ['primary', 'secondary', 'success', 'gray', 'dark', 'outline-primary', 'link'],
       },
     },
     type: {
