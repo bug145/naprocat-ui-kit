@@ -2,7 +2,7 @@
 import Modal from './index.vue';
 
 export default {
-  title: 'NaprocatUI/Modal',
+  title: 'Components/Modal',
   component: Modal,
 };
 

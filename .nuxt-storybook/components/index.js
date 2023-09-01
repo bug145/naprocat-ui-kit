@@ -1,6 +1,6 @@
-export const SsrCarousel = () => import('../..\\node_modules\\vue-ssr-carousel\\index.js' /* webpackChunkName: "components/ssr-carousel" */).then(c => wrapFunctional(c.default || c))
-export const NButton = () => import('../..\\components\\N\\Button\\index.vue' /* webpackChunkName: "components/n-button" */).then(c => wrapFunctional(c.default || c))
-export const NModal = () => import('../..\\components\\N\\Modal\\index.vue' /* webpackChunkName: "components/n-modal" */).then(c => wrapFunctional(c.default || c))
+export { default as SsrCarousel } from '../..\\node_modules\\vue-ssr-carousel\\index.js'
+export { default as NButton } from '../..\\components\\N\\Button\\index.vue'
+export { default as NModal } from '../..\\components\\N\\Modal\\index.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

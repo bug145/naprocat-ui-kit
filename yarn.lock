@@ -9610,6 +9610,27 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+naprocat-ui-kit@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/naprocat-ui-kit/-/naprocat-ui-kit-1.0.2.tgz#3e5c0dacd1b5215f10b6e085983621ccd9fac784"
+  integrity sha512-s/ZKWQRKgIn8+1Op0KOB8i2rWQfozRlQI/pM+OQOfue9PHU10Ndzx4NTQw+i+cjfxhU8Qclcd6Xs+575GJ+DZQ==
+  dependencies:
+    "@nuxtjs/axios" "^5.13.6"
+    "@nuxtjs/style-resources" "^1.2.1"
+    "@sass-collective/breakpoint" "^2.4.1"
+    core-js "^3.25.3"
+    eslint-config-airbnb-base "^15.0.0"
+    eslint-import-resolver-nuxt "^1.0.1"
+    eslint-plugin-import "^2.28.1"
+    n-ui-kit "^1.0.0"
+    nuxt "^2.15.8"
+    v-click-outside "^3.2.0"
+    vue "^2.7.10"
+    vue-popperjs "^2.3.0"
+    vue-server-renderer "^2.7.10"
+    vue-ssr-carousel "^2.3.2"
+    vue-template-compiler "^2.7.10"
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
