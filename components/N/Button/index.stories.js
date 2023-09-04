@@ -9,19 +9,21 @@ export const Default = {
   render: (args, { argTypes }) => ({
     components: { NButton },
     props: Object.keys(argTypes),
-    template: '<n-button @click="onClick" v-bind="$props">{{buttonText || "Default text"}}</n-button>',
+    template: '<n-button @click="onClick" v-bind="$props">{{buttonText}}</n-button>',
   }),
   args: {
     disabled: false,
     pending: false,
     prevent: false,
+    link: false,
     block: false,
     variant: 'primary',
     type: 'button',
-    textVariant: 'default',
     size: 'md',
-    rounded: 'md',
     buttonText: 'Текст кнопки',
+    fallback: 'fallback text',
+    align: 'center',
+    pill: false,
   },
   parameters: {
     docs: {
@@ -36,7 +38,16 @@ export const Default = {
       control: 'boolean',
       description: 'Отменяет событие клик но не отключает кнопку',
     },
+    link: {
+      control: 'boolean',
+      description: 'Стилизует кнопку под ссылку',
+    },
     buttonText: {
+      control: {
+        type: 'text',
+      },
+    },
+    fallback: {
       control: {
         type: 'text',
       },
@@ -44,7 +55,16 @@ export const Default = {
     variant: {
       control: {
         type: 'inline-radio',
-        options: ['primary', 'secondary', 'success', 'gray', 'dark', 'outline-primary', 'link'],
+        options: [
+          'primary',
+          'primary-outlined',
+          'secondary',
+          'secondary-outlined',
+          'success',
+          'warning',
+          'danger',
+          'danger-outlined',
+        ],
       },
     },
     type: {
@@ -53,23 +73,20 @@ export const Default = {
         options: ['button', 'submit', 'reset'],
       },
     },
-    textVariant: {
-      control: {
-        type: 'inline-radio',
-        options: ['blue', 'black', 'gray', 'white', 'red', 'default'],
-      },
-    },
     size: {
       control: {
         type: 'inline-radio',
         options: ['lg', 'md', 'sm', 'xs'],
       },
     },
-    rounded: {
+    align: {
       control: {
         type: 'inline-radio',
-        options: ['xl', 'lg', 'md', 'sm', 'xs', '0'],
+        options: ['start', 'center', 'end'],
       },
+    },
+    pill: {
+      control: 'boolean',
     },
   },
 };
