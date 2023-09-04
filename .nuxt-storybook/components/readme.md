@@ -8,4 +8,5 @@ You can directly use them in pages and other components without the need to impo
 
 - `<SsrCarousel>` | `<ssr-carousel>` (node_modules/vue-ssr-carousel/index.js)
 - `<NButton>` | `<n-button>` (components/N/Button/index.vue)
+- `<NLoading>` | `<n-loading>` (components/N/Loading/index.vue)
 - `<NModal>` | `<n-modal>` (components/N/Modal/index.vue)

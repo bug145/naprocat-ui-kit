@@ -5,6 +5,9 @@
   "NButton": {
     "description": "Auto imported from components/N/Button/index.vue"
   },
+  "NLoading": {
+    "description": "Auto imported from components/N/Loading/index.vue"
+  },
   "NModal": {
     "description": "Auto imported from components/N/Modal/index.vue"
   }
