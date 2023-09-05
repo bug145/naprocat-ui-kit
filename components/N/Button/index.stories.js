@@ -31,6 +31,9 @@ export const Default = {
         type: 'dynamic',
       },
     },
+    actions: {
+      handles: ['click'],
+    },
   },
   argTypes: {
     onClick: { action: 'click', table: { disable: true } },

@@ -9,8 +9,14 @@ export default {
 const parameters = {
   layout: 'centered',
   docs: {
+    transformSource: (code, ctx) => {
+      const codeNode = document.createElement('div');
+      codeNode.innerHTML = code;
+      console.log({ code: codeNode, ctx });
+      return code;
+    },
     source: {
-      type: 'dynamic',
+
     },
   },
 };
@@ -22,6 +28,10 @@ const argTypes = {
     control: {
       type: 'text',
     },
+  },
+  fluidBody: {
+    control: 'boolean',
+    description: 'Растягивает content модалки на всю ширину',
   },
   size: {
     control: {
@@ -37,7 +47,7 @@ export const Default = {
     props: Object.keys(argTypes),
     template: `
     <div>
-      <button @click="$props.value = true">modal</button>
+      <button @click="$props.value = true">Show modal</button>
       <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
         Curabitur blandit mollis lacus. Vivamus aliquet elit ac nisl.
       </n-modal>
@@ -52,12 +62,13 @@ export const Default = {
     size: 'md',
     submitText: 'Submit',
     disableSubmit: false,
+    fluidBody: false,
   },
   argTypes,
   parameters,
 };
 
-export const Inline = {
+export const Dropdown = {
   render: (args, { argTypes }) => ({
     components: { Modal },
     props: Object.keys(argTypes),
@@ -67,7 +78,7 @@ export const Inline = {
       <div><img src="https://placekitten.com/200/300"/></div>
       <div><img src="https://placekitten.com/300/200"/></div>
       <template v-slot:trigger>
-        <button @click="$props.value = true">modal</button>
+        <button @click="$props.value = true">Show inline modal</button>
       </template>
     </n-modal>
     `,
@@ -80,6 +91,7 @@ export const Inline = {
     size: 'md',
     submitText: '',
     disableSubmit: false,
+    fluidBody: false,
   },
   argTypes,
   parameters,

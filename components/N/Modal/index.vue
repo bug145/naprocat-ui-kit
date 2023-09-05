@@ -62,15 +62,16 @@
               class="modal__footer"
             >
               <slot name="footer">
-                <UIButton
+                <n-button
                   v-if="submitText"
-                  :active="!disableSubmit"
+                  :disabled="disableSubmit"
                   variant="primary"
+                  block
                   type="button"
                   @click="submitHandle"
                 >
                   {{ submitText }}
-                </UIButton>
+                </n-button>
               </slot>
             </div>
           </div>
@@ -249,6 +250,9 @@ export default {
     },
   },
   watch: {
+    $isMobile(val) {
+      console.log({ twt: val });
+    },
     value(val) {
       this.contentHidden = val;
       this.overlayReady = false;
@@ -266,6 +270,9 @@ export default {
         this.fixWindow();
       }
     },
+  },
+  created() {
+    console.log({ tt: this.$isMobile });
   },
   methods: {
     outsideClick() {
@@ -489,6 +496,8 @@ $mobile-top-height: 300px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    border: none;
+    cursor: pointer;
   }
 }
 </style>

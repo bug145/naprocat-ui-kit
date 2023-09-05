@@ -5,6 +5,12 @@ import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch,
 import NuxtError from './components/nuxt-error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
+import '..\\node_modules\\normalize.css\\normalize.css'
+
+import '..\\assets\\styles\\reset.css'
+
+import '..\\node_modules\\vue-animate-transitions\\dist\\vue-animate-transitions.min.css'
+
 import '..\\node_modules\\vue-ssr-carousel\\index.css'
 
 import _6f6c098b from './layouts/default.vue'
