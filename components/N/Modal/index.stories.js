@@ -15,9 +15,7 @@ const parameters = {
       console.log({ code: codeNode, ctx });
       return code;
     },
-    source: {
-
-    },
+    source: {},
   },
 };
 
@@ -47,7 +45,7 @@ export const Default = {
     props: Object.keys(argTypes),
     template: `
     <div>
-      <button @click="$props.value = true">Show modal</button>
+      <n-button @click="$props.value = true">Show modal</n-button>
       <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
         Curabitur blandit mollis lacus. Vivamus aliquet elit ac nisl.
       </n-modal>
@@ -73,12 +71,12 @@ export const Dropdown = {
     components: { Modal },
     props: Object.keys(argTypes),
     template: `
-    <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
+    <n-modal @input="onChange" @submit="onSubmit" v-bind="$props">
       <div><img src="https://placekitten.com/200/200"/></div>
       <div><img src="https://placekitten.com/200/300"/></div>
       <div><img src="https://placekitten.com/300/200"/></div>
       <template v-slot:trigger>
-        <button @click="$props.value = true">Show inline modal</button>
+        <n-button @click="$props.value = true">Show inline modal</n-button>
       </template>
     </n-modal>
     `,

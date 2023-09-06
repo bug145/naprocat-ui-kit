@@ -175,7 +175,7 @@ export default {
   },
   computed: {
     isDropDown() {
-      return this.hasTriggerSlot && !this.$isMobile;
+      return this.hasTriggerSlot && !this.isMobile;
     },
     wrapperComponent() {
       return this.isDropDown
@@ -213,13 +213,13 @@ export default {
 
       return contentVisible
               || this.value
-              || (!this.$isMobile && this.hasTriggerSlot)
-              || (!this.$isMobile && this.inline);
+              || (!this.isMobile && this.hasTriggerSlot)
+              || (!this.isMobile && this.inline);
     },
     contentShow() {
       return (this.value && this.overlayReady)
-      || (!this.$isMobile && this.hasTriggerSlot)
-      || (!this.$isMobile && this.inline);
+      || (!this.isMobile && this.hasTriggerSlot)
+      || (!this.isMobile && this.inline);
     },
 
     modalOpen: {
@@ -231,7 +231,7 @@ export default {
       },
     },
     modalTransitionName() {
-      return this.$isMobile ? 'fadeInUpBig' : 'fadeIn';
+      return this.isMobile ? 'fadeInUpBig' : 'fadeIn';
     },
     hasTopUnderHeaderSlot() {
       return this.$slots.top && this.$slots.top.length > 0;
@@ -248,11 +248,9 @@ export default {
     notInline() {
       return !this.inline && !this.hasTriggerSlot;
     },
+    isMobile() { return this.$device.isMobile; },
   },
   watch: {
-    $isMobile(val) {
-      console.log({ twt: val });
-    },
     value(val) {
       this.contentHidden = val;
       this.overlayReady = false;
@@ -270,9 +268,6 @@ export default {
         this.fixWindow();
       }
     },
-  },
-  created() {
-    console.log({ tt: this.$isMobile });
   },
   methods: {
     outsideClick() {

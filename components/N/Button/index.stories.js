@@ -9,7 +9,7 @@ export const Default = {
   render: (args, { argTypes }) => ({
     components: { NButton },
     props: Object.keys(argTypes),
-    template: '<n-button @click="onClick" v-bind="$props">{{buttonText}}</n-button>',
+    template: '<n-button @click="onClick" v-bind="$props">{{buttonText}}{{$device}}</n-button>',
   }),
   args: {
     disabled: false,

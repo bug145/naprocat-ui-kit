@@ -1,4 +1,5 @@
 import MobileDetect from 'mobile-detect';
+import Vue from 'vue';
 
 export default ({ req }, inject) => {
   const userAgent = process.client ? window.navigator.userAgent : req.headers['user-agent'];
@@ -14,15 +15,19 @@ export default ({ req }, inject) => {
       },
     };
 
-  const isIOS = ['iOS', 'iPadOS'].includes(device.os());
-  inject('isIOS', isIOS);
+  const reactiveIsMobile = Vue.observable({
+    isMobile: process.client ? window.matchMedia('(max-width: 768px)').matches : !!device.mobile(),
+    isIOS: ['iOS', 'iPadOS'].includes(device.os()),
+  });
 
-  const isMobile = process.client ? window.matchMedia('(max-width: 768px)').matches : !!device.mobile();
-  inject('isMobile', isMobile);
+  inject('device', reactiveIsMobile);
 
   if (process.client) {
     window.addEventListener('resize', () => {
-      inject('isMobile', window.matchMedia('(max-width: 768px)').matches);
+      const newIsMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (newIsMobile !== reactiveIsMobile.isMobile) {
+        reactiveIsMobile.isMobile = newIsMobile;
+      }
     });
   }
 };
