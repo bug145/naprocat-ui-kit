@@ -25,7 +25,6 @@ coverage
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
-.nuxt-storybook
 storybook-static
 
 # Bower dependency directory (https://bower.io/)
