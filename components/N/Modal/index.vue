@@ -62,15 +62,16 @@
               class="modal__footer"
             >
               <slot name="footer">
-                <UIButton
+                <n-button
                   v-if="submitText"
-                  :active="!disableSubmit"
+                  :disabled="disableSubmit"
                   variant="primary"
+                  block
                   type="button"
                   @click="submitHandle"
                 >
                   {{ submitText }}
-                </UIButton>
+                </n-button>
               </slot>
             </div>
           </div>
@@ -174,7 +175,7 @@ export default {
   },
   computed: {
     isDropDown() {
-      return this.hasTriggerSlot && !this.$isMobile;
+      return this.hasTriggerSlot && !this.isMobile;
     },
     wrapperComponent() {
       return this.isDropDown
@@ -212,13 +213,13 @@ export default {
 
       return contentVisible
               || this.value
-              || (!this.$isMobile && this.hasTriggerSlot)
-              || (!this.$isMobile && this.inline);
+              || (!this.isMobile && this.hasTriggerSlot)
+              || (!this.isMobile && this.inline);
     },
     contentShow() {
       return (this.value && this.overlayReady)
-      || (!this.$isMobile && this.hasTriggerSlot)
-      || (!this.$isMobile && this.inline);
+      || (!this.isMobile && this.hasTriggerSlot)
+      || (!this.isMobile && this.inline);
     },
 
     modalOpen: {
@@ -230,7 +231,7 @@ export default {
       },
     },
     modalTransitionName() {
-      return this.$isMobile ? 'fadeInUpBig' : 'fadeIn';
+      return this.isMobile ? 'fadeInUpBig' : 'fadeIn';
     },
     hasTopUnderHeaderSlot() {
       return this.$slots.top && this.$slots.top.length > 0;
@@ -247,6 +248,7 @@ export default {
     notInline() {
       return !this.inline && !this.hasTriggerSlot;
     },
+    isMobile() { return this.$device.isMobile; },
   },
   watch: {
     value(val) {
@@ -392,6 +394,7 @@ $mobile-top-height: 300px;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
+    max-width: 100vw;
     @include breakpoint.down(md) {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -489,6 +492,8 @@ $mobile-top-height: 300px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    border: none;
+    cursor: pointer;
   }
 }
 </style>

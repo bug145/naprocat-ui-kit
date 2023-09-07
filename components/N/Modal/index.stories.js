@@ -9,9 +9,13 @@ export default {
 const parameters = {
   layout: 'centered',
   docs: {
-    source: {
-      type: 'dynamic',
+    transformSource: (code, ctx) => {
+      const codeNode = document.createElement('div');
+      codeNode.innerHTML = code;
+      console.log({ code: codeNode, ctx });
+      return code;
     },
+    source: {},
   },
 };
 
@@ -22,6 +26,10 @@ const argTypes = {
     control: {
       type: 'text',
     },
+  },
+  fluidBody: {
+    control: 'boolean',
+    description: 'Растягивает content модалки на всю ширину',
   },
   size: {
     control: {
@@ -37,7 +45,7 @@ export const Default = {
     props: Object.keys(argTypes),
     template: `
     <div>
-      <button @click="$props.value = true">modal</button>
+      <n-button @click="$props.value = true">Show modal</n-button>
       <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
         Curabitur blandit mollis lacus. Vivamus aliquet elit ac nisl.
       </n-modal>
@@ -52,24 +60,28 @@ export const Default = {
     size: 'md',
     submitText: 'Submit',
     disableSubmit: false,
+    fluidBody: false,
   },
   argTypes,
   parameters,
 };
 
-export const Inline = {
+export const Dropdown = {
   render: (args, { argTypes }) => ({
     components: { Modal },
     props: Object.keys(argTypes),
     template: `
-    <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
-      <div><img src="https://placekitten.com/200/200"/></div>
-      <div><img src="https://placekitten.com/200/300"/></div>
-      <div><img src="https://placekitten.com/300/200"/></div>
-      <template v-slot:trigger>
-        <button @click="$props.value = true">modal</button>
-      </template>
-    </n-modal>
+    <div>
+      <n-button @click="$props.value = true" v-if="$device.isMobile">Show as modal</n-button>
+      <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
+        <div><img src="https://placekitten.com/200/200"/></div>
+        <div><img src="https://placekitten.com/200/300"/></div>
+        <div><img src="https://placekitten.com/300/200"/></div>
+        <template v-slot:trigger>
+          <n-button @click="$props.value = true">Show as dropdown</n-button>
+        </template>
+      </n-modal>
+    </div>
     `,
   }),
   args: {
@@ -80,6 +92,7 @@ export const Inline = {
     size: 'md',
     submitText: '',
     disableSubmit: false,
+    fluidBody: false,
   },
   argTypes,
   parameters,

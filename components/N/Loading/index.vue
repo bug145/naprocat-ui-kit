@@ -9,16 +9,19 @@
     >
       <span
         v-if="state==='pending'"
+        key="pending"
         class="pending"
       ></span>
       <img
         v-else-if="state==='success'"
+        key="success"
         class="success"
         src="@/assets/loading/success.gif"
         alt="success-state"
       />
       <img
         v-else-if="state==='failed'"
+        key="failed"
         class="failed"
         src="@/assets/loading/failed.gif"
         alt="failed-state"
