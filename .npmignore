@@ -1,3 +1,5 @@
 .gitlab-ci.yml
 .nuxt-storybook
-storybook-static
+/storybook-static
+/storybook-static/*
+.nuxt-storybook/*
