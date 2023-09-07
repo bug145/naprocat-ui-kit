@@ -1,6 +1,6 @@
 export { default as SsrCarousel } from '../..\\node_modules\\vue-ssr-carousel\\index.js'
-export { default as NLoading } from '../..\\components\\N\\Loading\\index.vue'
 export { default as NButton } from '../..\\components\\N\\Button\\index.vue'
+export { default as NLoading } from '../..\\components\\N\\Loading\\index.vue'
 export { default as NModal } from '../..\\components\\N\\Modal\\index.vue'
 
 // nuxt/nuxt.js#8607

@@ -7,6 +7,6 @@ You can directly use them in pages and other components without the need to impo
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
 - `<SsrCarousel>` | `<ssr-carousel>` (node_modules/vue-ssr-carousel/index.js)
-- `<NLoading>` | `<n-loading>` (components/N/Loading/index.vue)
 - `<NButton>` | `<n-button>` (components/N/Button/index.vue)
+- `<NLoading>` | `<n-loading>` (components/N/Loading/index.vue)
 - `<NModal>` | `<n-modal>` (components/N/Modal/index.vue)

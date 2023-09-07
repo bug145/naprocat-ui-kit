@@ -72,7 +72,7 @@ export const Dropdown = {
     props: Object.keys(argTypes),
     template: `
     <div>
-      <n-button @click="$props.value = true">Show as modal</n-button>
+      <n-button @click="$props.value = true" v-if="$device.isMobile">Show as modal</n-button>
       <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
         <div><img src="https://placekitten.com/200/200"/></div>
         <div><img src="https://placekitten.com/200/300"/></div>
