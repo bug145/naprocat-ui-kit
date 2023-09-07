@@ -24,10 +24,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    'normalize.css/normalize.css',
+    '@/assets/styles/reset.css',
+    'vue-animate-transitions/dist/vue-animate-transitions.min.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/mobile-detect',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
