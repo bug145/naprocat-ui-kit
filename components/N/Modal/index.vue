@@ -394,6 +394,7 @@ $mobile-top-height: 300px;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
+    max-width: 100vw;
     @include breakpoint.down(md) {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
