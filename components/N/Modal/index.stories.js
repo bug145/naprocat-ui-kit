@@ -71,14 +71,17 @@ export const Dropdown = {
     components: { Modal },
     props: Object.keys(argTypes),
     template: `
-    <n-modal @input="onChange" @submit="onSubmit" v-bind="$props">
-      <div><img src="https://placekitten.com/200/200"/></div>
-      <div><img src="https://placekitten.com/200/300"/></div>
-      <div><img src="https://placekitten.com/300/200"/></div>
-      <template v-slot:trigger>
-        <n-button @click="$props.value = true">Show inline modal</n-button>
-      </template>
-    </n-modal>
+    <div>
+      <n-button @click="$props.value = true">Show as modal</n-button>
+      <n-modal @input="onChange" @submit="onSubmit" v-bind="$props" v-model="value">
+        <div><img src="https://placekitten.com/200/200"/></div>
+        <div><img src="https://placekitten.com/200/300"/></div>
+        <div><img src="https://placekitten.com/300/200"/></div>
+        <template v-slot:trigger>
+          <n-button @click="$props.value = true">Show as dropdown</n-button>
+        </template>
+      </n-modal>
+    </div>
     `,
   }),
   args: {
