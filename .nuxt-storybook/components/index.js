@@ -1,7 +1,11 @@
 export { default as SsrCarousel } from '../..\\node_modules\\vue-ssr-carousel\\index.js'
-export { default as NButton } from '../..\\components\\N\\Button\\index.vue'
+export { default as NBadge } from '../..\\components\\N\\Badge\\index.vue'
+export { default as NBanner } from '../..\\components\\N\\Banner\\index.vue'
 export { default as NLoading } from '../..\\components\\N\\Loading\\index.vue'
+export { default as NButton } from '../..\\components\\N\\Button\\index.vue'
 export { default as NModal } from '../..\\components\\N\\Modal\\index.vue'
+export { default as NTree } from '../..\\components\\N\\Tree\\index.vue'
+export { default as NBannerItem } from '../..\\components\\N\\Banner\\item\\index.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

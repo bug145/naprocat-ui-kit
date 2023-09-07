@@ -2,13 +2,25 @@
   "SsrCarousel": {
     "description": "Auto imported from node_modules/vue-ssr-carousel/index.js"
   },
-  "NButton": {
-    "description": "Auto imported from components/N/Button/index.vue"
+  "NBadge": {
+    "description": "Auto imported from components/N/Badge/index.vue"
+  },
+  "NBanner": {
+    "description": "Auto imported from components/N/Banner/index.vue"
   },
   "NLoading": {
     "description": "Auto imported from components/N/Loading/index.vue"
   },
+  "NButton": {
+    "description": "Auto imported from components/N/Button/index.vue"
+  },
   "NModal": {
     "description": "Auto imported from components/N/Modal/index.vue"
+  },
+  "NTree": {
+    "description": "Auto imported from components/N/Tree/index.vue"
+  },
+  "NBannerItem": {
+    "description": "Auto imported from components/N/Banner/item/index.vue"
   }
 }
