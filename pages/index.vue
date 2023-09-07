@@ -1,8 +1,12 @@
 <template>
-  <p>index</p>
+  <div>
+    <p>index</p>
+    <n-tree></n-tree>
+  </div>
 </template>
 
 <script>
+
 export default {
   name: 'IndexPage',
 };
