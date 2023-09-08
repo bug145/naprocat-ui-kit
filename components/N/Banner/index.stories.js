@@ -20,6 +20,7 @@ export const Default = {
   },
   args: {
     carousel: false,
+    connect: false,
     items: [
       {
         id: 1,
@@ -51,5 +52,10 @@ export const Default = {
       },
     ],
   },
-  argTypes: {},
+  argTypes: {
+    connect: {
+      control: false,
+      description: 'Boolean | Связывает с API (по умолчанию включен)',
+    },
+  },
 };
