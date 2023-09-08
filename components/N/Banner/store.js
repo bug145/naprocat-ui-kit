@@ -6,7 +6,7 @@ const state = () => ({
 });
 
 const getters = {
-  items: (state) => cloneDeep(state.items)?.slice(0, 4),
+  items: (state) => cloneDeep(state.items),
 };
 
 const mutations = {
