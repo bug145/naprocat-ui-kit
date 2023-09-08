@@ -119,7 +119,7 @@ module.exports = {
       'error',
       {
         props: true,
-        ignorePropertyModificationsFor: ['state', 'vm', 'app'],
+        ignorePropertyModificationsFor: ['state', 'vm', 'app', 'vuex'],
       },
     ],
     'no-cond-assign': ['error', 'always'],
