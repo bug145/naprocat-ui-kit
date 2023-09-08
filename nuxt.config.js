@@ -33,7 +33,7 @@ export default {
   plugins: [
     '@/plugins/mobile-detect',
     {
-      src: '@/components/Banner/plugin',
+      src: '@/components/N/Banner/plugin',
       store: true,
       component: false,
     },
