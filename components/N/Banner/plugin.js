@@ -1,6 +1,4 @@
 import Vue from 'vue';
-import storeModule from './store';
-import vueComponent from './index.vue';
 
 export default (context) => {
   const {
@@ -13,10 +11,16 @@ export default (context) => {
   } = context.$config || {};
 
   if (component) {
-    Vue.component('NBbanners', vueComponent);
+    import('./index.vue')
+      .then((vueComponent) => {
+        Vue.component('NBanners', vueComponent);
+      });
   }
 
   if (store) {
-    rootVuex.registerModule('banners', storeModule);
+    import('./store')
+      .then((storeModule) => {
+        rootVuex.registerModule('banners', storeModule);
+      });
   }
 };
