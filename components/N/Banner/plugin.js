@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import storeModule from './store';
-import vueComponent from './index.vue';
 
 export default (context) => {
   const {
@@ -13,7 +12,18 @@ export default (context) => {
   } = context.$config || {};
 
   if (component) {
-    Vue.component('NBbanners', vueComponent);
+    import('./index.vue')
+      .then((vueComponent) => {
+        Vue.component('NBanners', vueComponent.default);
+      });
+    import('../BannerItem/index.vue')
+      .then((vueComponent) => {
+        Vue.component('NBannerItem', vueComponent.default);
+      });
+    import('../Badge/index.vue')
+      .then((vueComponent) => {
+        Vue.component('NBadge', vueComponent.default);
+      });
   }
 
   if (store) {

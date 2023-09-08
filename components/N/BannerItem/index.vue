@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link class="banner" :to="catalogLink(item)">
+  <nuxt-link class="banner" :to="goTo(item)">
     <img
       class="banner__bg"
       loading="lazy"
@@ -13,7 +13,7 @@
       {{ item.description }}
     </p>
     <n-badge variant="warning" rounded="xl">
-      {{ то }}
+      {{ от }}
       <p class="banner__price">
         {{ item.price }}
       </p>
@@ -33,8 +33,8 @@ export default {
     },
   },
   methods: {
-    catalogLink() {
-      return '/catalog/';
+    goTo() {
+      return '#';
     },
   },
 };

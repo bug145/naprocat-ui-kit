@@ -1,8 +1,7 @@
 import NBanner from './index.vue';
-import NBannerItem from './item/index.vue';
 
 export default {
-  title: 'Template/Banner',
+  title: 'Modules/Banner/Wrapper',
   component: NBanner,
 };
 
@@ -21,6 +20,7 @@ export const Default = {
   },
   args: {
     carousel: false,
+    connect: false,
     items: [
       {
         id: 1,
@@ -52,29 +52,10 @@ export const Default = {
       },
     ],
   },
-  argTypes: {},
-};
-
-export const Item = {
-  render: (args, { argTypes }) => ({
-    components: { NBannerItem },
-    props: Object.keys(argTypes),
-    template: '<n-banner-item v-bind="$props"></n-banner-item>',
-  }),
-  parameters: {
-    docs: {
-      source: {
-        type: 'dynamic',
-      },
-    },
-  },
-  args: {
-    item: {
-      id: 1,
-      name: 'Покатаемся?',
-      description: 'Аренда велосипедов ?',
-      image_url: 'https://placekitten.com/800',
-      price: 5000,
+  argTypes: {
+    connect: {
+      control: false,
+      description: 'Boolean | Связывает с API (по умолчанию включен)',
     },
   },
 };
