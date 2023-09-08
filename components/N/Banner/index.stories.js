@@ -21,7 +21,38 @@ export const Default = {
   },
   args: {
     carousel: false,
+    items: [
+      {
+        id: 1,
+        name: 'Maecenas vestibulum mollis',
+        description: 'Donec orci lectus, aliquam ut, faucibus non, euismod id, nulla.',
+        image_url: 'https://placehold.co/800',
+        price: 186,
+      },
+      {
+        id: 1,
+        name: 'Curabitur nisi',
+        description: 'Ut non enim eleifend felis pretium feugiat.',
+        image_url: 'https://placehold.co/800',
+        price: 1054,
+      },
+      {
+        id: 1,
+        name: 'Fusce',
+        description: 'Vestibulum volutpat pretium libero.',
+        image_url: 'https://placehold.co/800',
+        price: 15896,
+      },
+      {
+        id: 1,
+        name: 'Phasellus accumsan cursus velit',
+        description: 'Sed cursus vitae tortor.',
+        image_url: 'https://placehold.co/800',
+        price: 125893,
+      },
+    ],
   },
+  argTypes: {},
 };
 
 export const Item = {
@@ -42,8 +73,7 @@ export const Item = {
       id: 1,
       name: 'Покатаемся?',
       description: 'Аренда велосипедов ?',
-      image_url: 'https://img.naprocat.kz/sig/aHR0cHM6Ly9taW5pby5uYXByb2NhdC5rei9uYXByb2NhdC1kZ'
-        + 'XYvYmFubmVycy9mczhIaGxmZmp3YWhQTzE1SUR5ckl1UXkyUEswZWQtbWV0YVltRnVibVZ5WDJKcGEyVXVjRzVuLS5wbmc=',
+      image_url: 'https://placekitten.com/800',
       price: 5000,
     },
   },
