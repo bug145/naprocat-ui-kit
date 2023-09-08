@@ -1,15 +1,15 @@
 import cloneDeep from 'lodash/cloneDeep';
 
-export const state = () => ({
+const state = () => ({
   items: [],
   city: undefined,
 });
 
-export const getters = {
+const getters = {
   items: (state) => cloneDeep(state.items)?.slice(0, 4),
 };
 
-export const mutations = {
+const mutations = {
   SET_ITEMS(state, payload) {
     if (!payload.length && state.city !== payload.city) {
       state.items = [...payload.data];
@@ -20,7 +20,7 @@ export const mutations = {
   },
 };
 
-export const actions = {
+const actions = {
   async fetch({ commit }) {
     // const city = await rootGetters['list/userSelectCity'];
     const city = 1;
@@ -28,4 +28,11 @@ export const actions = {
     commit('SET_ITEMS', { data: res, city });
     commit('SET_CITY', city);
   },
+};
+
+export default {
+  state,
+  actions,
+  mutations,
+  getters,
 };
