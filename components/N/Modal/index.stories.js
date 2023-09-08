@@ -2,7 +2,7 @@
 import Modal from './index.vue';
 
 export default {
-  title: 'Modules/Modal',
+  title: 'Components/Modal',
   component: Modal,
 };
 

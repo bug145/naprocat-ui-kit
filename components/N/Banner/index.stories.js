@@ -1,7 +1,7 @@
 import NBanner from './index.vue';
 
 export default {
-  title: 'Template/Banner',
+  title: 'Modules/Banner/Wrapper',
   component: NBanner,
 };
 
