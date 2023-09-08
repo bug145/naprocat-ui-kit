@@ -44,9 +44,9 @@ export default {
       default: true,
     },
   },
-  fetch() {
+  async fetch() {
     if (this.connect) {
-      this.fetch();
+      await this.fetch();
     }
   },
   computed: {

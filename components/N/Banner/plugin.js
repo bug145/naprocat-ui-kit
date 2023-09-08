@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import storeModule from './store';
 
 export default (context) => {
   const {
@@ -26,9 +27,6 @@ export default (context) => {
   }
 
   if (store) {
-    import('./store')
-      .then((storeModule) => {
-        rootVuex.registerModule('banners', storeModule.default);
-      });
+    rootVuex.registerModule('banners', storeModule);
   }
 };
