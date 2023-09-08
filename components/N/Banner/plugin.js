@@ -13,14 +13,18 @@ export default (context) => {
   if (component) {
     import('./index.vue')
       .then((vueComponent) => {
-        Vue.component('NBanners', vueComponent);
+        Vue.component('NBanners', vueComponent.default);
+      });
+    import('../BannerItem/index.vue')
+      .then((vueComponent) => {
+        Vue.component('NBannerItem', vueComponent.default);
       });
   }
 
   if (store) {
     import('./store')
       .then((storeModule) => {
-        rootVuex.registerModule('banners', storeModule);
+        rootVuex.registerModule('banners', storeModule.default);
       });
   }
 };
