@@ -6,26 +6,36 @@
       class="tree__title"
       :class="{'tree__down': item.children?.length, 'tree__down--active': openIn(item)}"
     >
+      <input
+        v-if="!item.children?.length && multiple"
+        :id="`id-${item.value}`"
+        class="tree__checkbox"
+        type="checkbox"
+      />
       <label
+        :for="`id-${item.value}`"
         class="tree__label"
         :class="{'tree__title--active' : pick(item)}"
         @click="clickItem(item)"
       >
         {{ item.title }}
       </label>
-      <UITrees
-        v-if="openIn(item) && item.children?.length"
-        v-model="selectedIn"
+      <n-tree
+        v-show="openIn(item) && item.children?.length"
+        v-model="selected"
         class="tree__children"
         :items="item.children"
+        :multiple="multiple"
+        @openChange="openChanges(item.value, $event)"
       />
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'UITrees',
+  name: 'NTree',
   props: {
     items: {
       type: [Object, Array],
@@ -43,10 +53,10 @@ export default {
       type: Number,
       default: undefined,
     },
+    multiple: Boolean,
   },
   data() {
     return {
-      selectedIn: null,
       open: [],
     };
   },
@@ -60,12 +70,18 @@ export default {
       },
     },
   },
-  watch: {
-    selectedIn(val) {
-      this.$emit('input', val);
-    },
+  mounted() {
+    const id = this.items.find((e) => e.value === this.selected)?.value;
+    if (id) {
+      this.openChanges(id, this.open);
+    }
   },
   methods: {
+    openChanges(id, open) {
+      this.open = open;
+      this.open.push(id);
+      this.$emit('openChange', this.open);
+    },
     pick(item) {
       return this.selected === item.value;
     },
@@ -92,19 +108,24 @@ export default {
     font-size: 14px;
     line-height: 17px;
     cursor: pointer;
+    position: relative;
     &:not(:last-child){
       margin-bottom: 18px;
     }
     &--active{
-      color: var(--primary-color);
+      color: var(--primary-color, red);
     }
   }
+  &__checkbox{
+    position: absolute;
+    top: 2px;
+  }
   &__label{
+    padding-left: 16px;
     cursor: pointer;
   }
   &__down {
     position: relative;
-    padding-left: 16px;
     &::before {
       content: '';
       display: inline-block;
@@ -120,6 +141,7 @@ export default {
       border-bottom-color: transparent;
       transform: rotate(45deg);
       transition: .3s;
+      z-index: -1;
     }
     &--active{
       &::before {
