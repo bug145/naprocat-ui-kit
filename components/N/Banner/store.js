@@ -7,14 +7,12 @@ const state = () => ({
 });
 
 const getters = {
-  items: (state) => cloneDeep(state.items),
+  items: (state) => cloneDeep(state.items[state.city]),
 };
 
 const mutations = {
   SET_ITEMS(state, payload) {
-    if (!payload.length && state.city !== payload.city) {
-      state.items = [...payload.data];
-    }
+    state.items[payload.city] = payload.data;
   },
   SET_CITY(state, payload) {
     state.city = payload;

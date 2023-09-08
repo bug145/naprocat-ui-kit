@@ -19,6 +19,10 @@ export default (context) => {
       .then((vueComponent) => {
         Vue.component('NBannerItem', vueComponent.default);
       });
+    import('../Badge/index.vue')
+      .then((vueComponent) => {
+        Vue.component('NBadge', vueComponent.default);
+      });
   }
 
   if (store) {
