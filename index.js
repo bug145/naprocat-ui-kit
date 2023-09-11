@@ -1,12 +1,13 @@
-export default function ExampleModule(moduleOptions) {
-  console.log(moduleOptions.token);
-  console.log(this.options.exampleMsg);
+import consola from 'consola';
+
+export default function InitialModule(moduleOptions) {
+  consola.info({ moduleOptions });
+  consola.info({ pots: this.options });
 
   this.nuxt.hook('ready', async (nuxt) => {
-    console.log('Nuxt is ready');
-    console.log({ nuxt });
+    consola.info('Nuxt is ready');
+    consola.info({ nuxt });
   });
 }
 
-// REQUIRED if publishing the module as npm package
 module.exports.meta = require('./package.json');

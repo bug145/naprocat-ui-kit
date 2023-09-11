@@ -13,11 +13,11 @@
       {{ item.description }}
     </p>
     <n-badge variant="warning" rounded="xl">
-      {{ от }}
+      от
       <p class="banner__price">
         {{ item.price }}
       </p>
-      {{ день }}
+      день
     </n-badge>
     <!--    <atoms-direction class="banner__rent" :text="`${$t('rent')}`" />-->
   </nuxt-link>
