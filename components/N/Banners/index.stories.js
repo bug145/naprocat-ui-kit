@@ -1,15 +1,15 @@
-import NBanner from './index.vue';
+import NBanners from './index.vue';
 
 export default {
   title: 'Modules/Banner/Wrapper',
-  component: NBanner,
+  component: NBanners,
 };
 
 export const Default = {
   render: (args, { argTypes }) => ({
-    components: { NBanner },
+    components: { NBanners },
     props: Object.keys(argTypes),
-    template: '<n-banner v-bind="$props"></n-banner>',
+    template: '<n-banners v-bind="$props"></n-banners>',
   }),
   parameters: {
     docs: {

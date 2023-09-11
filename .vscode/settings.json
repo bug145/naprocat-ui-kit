@@ -3,5 +3,10 @@
         "consola",
         "popperjs",
         "модалки"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#132B5D",
+        "titleBar.activeBackground": "#1B3D82",
+        "titleBar.activeForeground": "#F9FBFE"
+    }
 }
