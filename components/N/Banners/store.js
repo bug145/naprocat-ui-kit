@@ -1,19 +1,16 @@
-import cloneDeep from 'lodash/cloneDeep';
-
 const state = () => ({
   items: {},
   city: undefined,
 });
 
 const getters = {
-  items: (state) => cloneDeep(state.items[state.city]),
+  items: (state) => state.items[state.city],
 };
 
 const mutations = {
   SET_ITEMS(state, payload) {
-    const temp = cloneDeep(state.items);
-    temp[payload.city] = payload.data;
-    state.items = temp;
+    // eslint-disable-next-line no-underscore-dangle
+    this._vm.$set(state.items, [payload.city], payload.data);
   },
   SET_CITY(state, payload) {
     state.city = payload;
