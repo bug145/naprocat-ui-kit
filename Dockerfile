@@ -10,7 +10,7 @@ COPY package*.json ./
 COPY . .
 
 # собираем приложение для production с минификацией.
-RUN yarn run publish
+RUN yarn run build
 
 #EXPOSE 3001
 

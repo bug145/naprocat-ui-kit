@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'BaseBadge',
+  name: 'NBadge',
   props: {
     variant: {
       type: String,

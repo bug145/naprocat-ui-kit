@@ -1,0 +1,93 @@
+import {
+  concat,
+  forEach,
+  get,
+  isString,
+  indexOf,
+  reject,
+  last,
+  includes,
+} from 'lodash';
+import {
+  resolve,
+  posix,
+  dirname,
+  join,
+  sep,
+} from 'path';
+import { readdirSync } from 'fs';
+import { glob } from 'glob';
+
+const arrHas = (arr, needle) => indexOf(arr, needle) !== -1;
+
+export default async function MyNuxtModule(moduleOptions) {
+  const options = { ...this.options.flux, ...moduleOptions };
+
+  const componentsDir = resolve(__dirname, 'components/N');
+  const componentsAll = readdirSync(componentsDir);
+
+  let components = get(options, 'components', componentsAll);
+
+  const findPatern = posix.normalize(`${componentsDir}/**/dependencies.js`);
+
+  let dependencies = await glob(findPatern);
+
+  dependencies = reject(dependencies, (dependency) => {
+    const key = last(dirname(dependency).split(sep));
+    return !includes(components, key);
+  });
+
+  forEach(dependencies, async (dependency) => {
+    const rootDir = resolve(__dirname, '../../');
+    const { default: res } = await import(resolve(rootDir, dependency));
+
+    components = concat(components, res);
+  });
+
+  this.nuxt.hook('ready', async () => {
+    components.forEach(async (item) => {
+      const config = {
+        store: true,
+        router: true,
+        name: undefined,
+      };
+
+      if (isString(item)) {
+        config.name = item;
+      } else {
+        const itemName = get(item, 'name', undefined);
+        const itemRouter = get(item, 'router', true);
+        const itemStore = get(item, 'store', true);
+
+        config.name = itemName;
+        config.router = itemRouter;
+        config.store = itemStore;
+      }
+
+      const dirPath = join(componentsDir, `/${config.name}`);
+      const dir = readdirSync(dirPath);
+
+      this.nuxt.hook('components:dirs', (dirs) => {
+        dirs.push({
+          path: dirPath,
+          pattern: '*.vue',
+          prefix: `N${config.name}`,
+        });
+      });
+
+      if (config.store && arrHas(dir, 'store.js')) {
+        import(join(dirPath, '/store.js')).then(({ default: storeModule }) => {
+          const { dst: pluginDst } = this.addTemplate({
+            src: resolve(__dirname, 'plugins/register-store.js'),
+            options: {
+              name: config.name,
+              storeModule,
+            },
+          });
+
+          this.options.plugins.push(resolve(this.options.buildDir, pluginDst));
+        });
+      }
+    });
+  });
+}

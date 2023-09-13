@@ -1,7 +1,8 @@
 <template>
-  <nuxt-link class="banner__item" :to="catalogLink(item)">
+  <nuxt-link class="banner" :to="goTo(item)">
     <img
       class="banner__bg"
+      loading="lazy"
       :src="item.image_url"
       :alt="`${item.name} - ${item.description}`"
     />
@@ -12,11 +13,11 @@
       {{ item.description }}
     </p>
     <n-badge variant="warning" rounded="xl">
-      {{ то }}
+      от
       <p class="banner__price">
         {{ item.price }}
       </p>
-      {{ день }}
+      день
     </n-badge>
     <!--    <atoms-direction class="banner__rent" :text="`${$t('rent')}`" />-->
   </nuxt-link>
@@ -32,65 +33,66 @@ export default {
     },
   },
   methods: {
-    catalogLink() {
-      return '/catalog/';
+    goTo() {
+      return '#';
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.banner{
-  &__item{
-    padding: 40px 40px 20px 40px;
-    box-sizing: border-box;
-    border-radius: 20px;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    @include breakpoint.down(md) {
-      padding: 30px 24px 30px 24px;
-    }
-    &:hover{
-      opacity: .9;
-    }
-    &:nth-child(1) {
-      grid-column: span 3;
-    }
-    &:nth-child(2) {
-      grid-column: span 2;
-    }
-    &:nth-child(3) {
-      grid-column: span 2;
-    }
-    &:nth-child(4) {
-      grid-column: span 3;
-    }
+.banner {
+  padding: 40px 40px 20px 40px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0;
+  text-decoration: none;
+  @include breakpoint.down(md) {
+    padding: 30px 24px 30px 24px;
   }
-  &__name{
-    width: 60%;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 1.1;
+  &:hover {
+    opacity: .9;
+  }
+  &:nth-child(1) {
+    grid-column: span 3;
+  }
+  &:nth-child(2) {
+    grid-column: span 2;
+  }
+  &:nth-child(3) {
+    grid-column: span 2;
+  }
+  &:nth-child(4) {
+    grid-column: span 3;
+  }
+
+  &__name {
     color: #333333;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 6px;
     @include breakpoint.down(md) {
       font-size: 20px;
     }
   }
-  &__text{
+  &__text {
     max-width: 200px;
-    margin-top: 6px;
     margin-bottom: 12px;
     font-size: 18px;
-    line-height: 1.1;
+    font-weight: 400;
     color: #333333;
     @include breakpoint.down(md) {
       font-size: 14px;
     }
   }
-  &__price{
+  &__price {
     margin: 0 7px 0 7px;
     font-weight: 700;
     font-size: 16px;
@@ -101,7 +103,7 @@ export default {
       font-size: 14px;
     }
   }
-  &__rent{
+  &__rent {
     position: absolute;
     bottom: 15px;
     @include breakpoint.down(md) {
@@ -116,7 +118,9 @@ export default {
     left: 0;
     top: 0;
     object-fit: cover;
-    object-position: top;
+    user-select: none;
+    pointer-events: none;
+    object-position: bottom right;
   }
 }
 </style>
