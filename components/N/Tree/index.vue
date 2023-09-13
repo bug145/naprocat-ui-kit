@@ -4,24 +4,24 @@
       v-for="(item, index) in items"
       :key="index"
       class="tree__title"
-      :class="{'tree__down': item.children?.length, 'tree__down--active': openIn(item)}"
+      :class="{'tree__down': item.children?.length, 'tree__down--active': open(item)}"
     >
       <input
         v-if="!item.children?.length && multiple"
-        :id="`id-${item.value}`"
+        :id="`branch-${componentId}-${item.value}`"
         class="tree__checkbox"
         type="checkbox"
       />
       <label
-        :for="`id-${item.value}`"
+        :for="`branch-${componentId}-${item.value}`"
         class="tree__label"
-        :class="{'tree__title--active' : pick(item)}"
+        :class="{'tree__title--active' : active(item)}"
         @click="clickItem(item)"
       >
         {{ item.title }}
       </label>
       <n-tree
-        v-show="openIn(item) && item.children?.length"
+        v-show="open(item) && item.children?.length"
         v-model="selected"
         class="tree__children"
         :items="item.children"
@@ -50,17 +50,21 @@ export default {
       ],
     },
     value: {
-      type: Number,
-      default: undefined,
+      type: [Number, Array],
+      default: () => [],
     },
     multiple: Boolean,
   },
   data() {
     return {
-      open: [],
+      opens: [],
     };
   },
   computed: {
+    componentId() {
+      // eslint-disable-next-line no-underscore-dangle
+      return this._uid;
+    },
     selected: {
       get() {
         return this.value;
@@ -71,30 +75,41 @@ export default {
     },
   },
   mounted() {
-    const id = this.items.find((e) => e.value === this.selected)?.value;
+    const id = this.items.find((e) => this.active(e))?.value;
     if (id) {
-      this.openChanges(id, this.open);
+      this.openChanges(id, this.opens);
     }
   },
   methods: {
-    openChanges(id, open) {
-      this.open = open;
-      this.open.push(id);
-      this.$emit('openChange', this.open);
+    openChanges(id, opens) {
+      this.opens = opens;
+      this.opens.push(id);
+      this.$emit('openChange', this.opens);
     },
-    pick(item) {
-      return this.selected === item.value;
+    checking(item) {
+      return this.multiple && this.selected.includes(item.value);
     },
-    openIn(item) {
-      return this.open.includes(item.value);
+    active(item) {
+      return this.selected === item.value || this.checking(item);
+    },
+    open(item) {
+      // this.check = this.checking(item);
+      return this.opens.includes(item.value);
     },
     clickItem(item) {
-      this.selected = item.value;
-      const index = this.open.findIndex((e) => e === item.value);
-      if (index !== -1) {
-        this.open.splice(index, 1);
+      this.addIds(this.opens, item.value);
+      if (this.multiple) {
+        this.addIds(this.selected, item.value);
       } else {
-        this.open.push(item.value);
+        this.selected = item.value;
+      }
+    },
+    addIds(arr, id) {
+      const ids = arr.findIndex((e) => e === id);
+      if (ids !== -1) {
+        arr.splice(ids, 1);
+      } else {
+        arr.push(id);
       }
     },
   },

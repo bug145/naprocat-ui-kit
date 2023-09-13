@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>index - {{ ids }}</p><br />
-    <n-tree v-model="ids" :items="items" />
+    <n-header />
   </div>
 </template>
 
@@ -10,7 +9,7 @@ export default {
   name: 'IndexPage',
   data() {
     return {
-      ids: 1,
+      ids: [210, 197, 92, 198],
       items: [
         {
           title: 'Спорт и туризм',
