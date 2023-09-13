@@ -487,7 +487,7 @@ $mobile-top-height: 300px;
     bottom: 13.64%;
     width: 16px;
     height: 16px;
-    background-image: url('@/assets/icons/close.svg');
+    background-image: url('../../../assets/icons/close.svg');
     background-color: transparent;
     background-position: center;
     background-repeat: no-repeat;

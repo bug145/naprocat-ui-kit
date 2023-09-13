@@ -1,29 +1,19 @@
 <template>
-  <div
-    class="result"
-    :class="containerClass"
-  >
-    <transition
-      name="zoomIn"
-      mode="out-in"
-    >
-      <span
-        v-if="state==='pending'"
-        key="pending"
-        class="pending"
-      ></span>
+  <div class="result" :class="containerClass">
+    <transition name="zoomIn" mode="out-in">
+      <span v-if="state === 'pending'" key="pending" class="pending"></span>
       <img
-        v-else-if="state==='success'"
+        v-else-if="state === 'success'"
         key="success"
         class="success"
-        src="@/assets/loading/success.gif"
+        src="../../../assets/loading/success.gif"
         alt="success-state"
       />
       <img
-        v-else-if="state==='failed'"
+        v-else-if="state === 'failed'"
         key="failed"
         class="failed"
-        src="@/assets/loading/failed.gif"
+        src="../../../assets/loading/failed.gif"
         alt="failed-state"
       />
     </transition>
@@ -87,14 +77,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.result{
+.result {
   margin: auto;
-  .success, .failed{
+
+  .success,
+  .failed {
     width: 100%;
     height: 100%;
     transform: scale(1.58);
   }
-  .pending{
+
+  .pending {
     width: 100%;
     height: 100%;
     border: 6px solid #4DAAFF;
@@ -106,29 +99,35 @@ export default {
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
   }
-  &--lg{
+
+  &--lg {
     width: 110px;
     height: 110px;
   }
-  &--md{
+
+  &--md {
     width: 80px;
     height: 80px;
   }
-  &--sm{
+
+  &--sm {
     width: 60px;
     height: 60px;
   }
-  &--xs{
+
+  &--xs {
     width: 22px;
     height: 22px;
-    &.result--secondary{
+
+    &.result--secondary {
       .pending {
         border: 3px solid #FFFFFF;
         border-bottom-color: transparent;
         border-left-color: transparent;
       }
     }
-    &.result--primary{
+
+    &.result--primary {
       .pending {
         border: 3px solid #4DAAFF;
         border-bottom-color: transparent;
@@ -137,10 +136,12 @@ export default {
     }
   }
 }
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
