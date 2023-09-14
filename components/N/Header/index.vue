@@ -1,73 +1,17 @@
 <template>
-  <div
-    class="header"
-    :class="{'header--border' : showBorder, 'header--only-search': showOnlySearch}"
-  >
+  <div class="header">
     <div class="header__block">
-      <!--      <div-->
-      <!--        v-if="!showOnlySearch"-->
-      <!--        class="flex-align"-->
-      <!--      >-->
-      <!--        <lazy-hydrate never>-->
       <n-header-logo />
-      <!--        </lazy-hydrate>-->
-      <n-header-city />
-      <!--      </div>-->
-      <!--      <lazy-hydrate when-idle>-->
-      <input type="text" class="header__center pr" />
-      <!--      </lazy-hydrate>-->
-      <!--      <div-->
-      <!--        v-if="!showOnlySearch"-->
-      <!--        class="header__right flex-between"-->
-      <!--      >-->
-      <!--        <lazy-hydrate on-interaction>-->
-      <!--<NavHeaderLanguage v-if="!showOnlySearch && $isMobile && $config.enableLocales" />-->
-      <!--        </lazy-hydrate>-->
-      <!--        <client-only>-->
-      <!--          <template #placeholder>-->
-      <!--            <load-skaletion-->
-      <!--              v-if="!$isMobile"-->
-      <!--              :style="{-->
-      <!--                borderRadius: '8px',-->
-      <!--                display: 'block',-->
-      <!--                width: '170px',-->
-      <!--                height: '46px'-->
-      <!--              }"-->
-      <!--            />-->
-      <!--          </template>-->
-      <!--          <NavHeaderCreateProductBtn />-->
-      <!--        </client-only>-->
-      <!--        <lazy-hydrate when-idle>-->
-      <n-header-links />
-      <!--        </lazy-hydrate>-->
-      <!--        <client-only>-->
-      <!--          <template #placeholder>-->
-      <!--            <load-skaletion-->
-      <!--              :style="{-->
-      <!--                borderRadius: '25px',-->
-      <!--                display: 'block',-->
-      <!--                width: '46px',-->
-      <!--                height: '46px'-->
-      <!--              }"-->
-      <!--            />-->
-      <!--          </template>-->
-      <n-header-avatar />
-    <!--        </client-only>-->
-    <!--      </div>-->
+      <n-header-city v-if="city && !mobile" />
+      <input v-if="!mobile" type="text" class="header__center pr" />
+      <n-header-links v-if="!mobile" />
+      <n-header-avatar v-if="avatar && !mobile" />
+      <n-header-burger v-if="mobile" />
     </div>
-    <!--    <NavHeaderOfflineError />-->
-    <!--    <client-only>-->
-    <!--      <loader @show="percentShow=$event" />-->
-    <!--    </client-only>-->
   </div>
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
-// import LazyHydrate from 'vue-lazy-hydration';
-// import { routeTrim } from '~/utils/routeSnip';
-// import Loader from '~/components/Loader.vue';
-
 import NHeaderLogo from '~/components/N/Header/logo.vue';
 import NHeaderCity from '~/components/N/Header/city.vue';
 import NHeaderLinks from '~/components/N/Header/links.vue';
@@ -78,37 +22,13 @@ export default {
   components: {
     NHeaderAvatar, NHeaderLinks, NHeaderCity, NHeaderLogo,
   },
-  // components: {
-  //   LazyHydrate,
-  //   Loader,
-  // },
-  data() {
-    return {
-      percentShow: false,
-    };
-  },
-  computed: {
-    showOnlySearch() {
-      // return ['searchPage', 'catalogPage'].includes(routeTrim(this.$route.name)) && this.$isMobile;
-      return true;
+  props: {
+    city: Boolean,
+    avatar: Boolean,
+    mobile: {
+      type: Boolean,
+      default: true,
     },
-    showBorder() {
-      // return routeTrim(this.$route.name) !== 'index'
-      //   && !this.showOnlySearch
-      //   && !this.percentShow;
-      return true;
-    },
-  },
-  async mounted() {
-    // if (this.$auth.loggedIn) {
-    //   await this.notificationUnread();
-    // }
-  },
-  methods: {
-    // routeTrim,
-    // ...mapActions({
-    //   notificationUnread: 'notification/notificationUnread',
-    // }),
   },
 };
 </script>
@@ -120,10 +40,8 @@ export default {
   max-width: 100vw;
   position: fixed;
   z-index: 4;
-  //border: 1px solid red;
   @include breakpoint.down(md) {
     position: inherit;
-    z-index: 5;
   }
   &__block{
     width: 100%;
@@ -134,10 +52,10 @@ export default {
     justify-content: space-between;
     padding: 27px 0 23px 0;
     @include breakpoint.down(md) {
-      display: grid;
-      grid-gap: 20px;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
+      //display: grid;
+      //grid-gap: 20px;
+      //grid-template-columns: repeat(2, 1fr);
+      //grid-template-rows: repeat(2, 1fr);
       width: 100%;
       padding: 18px 22px 20px;
     }
