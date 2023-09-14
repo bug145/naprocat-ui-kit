@@ -87,14 +87,14 @@ export default {
       this.$emit('openChange', this.opens);
     },
     checking(item) {
-      return this.multiple && this.selected.includes(item.value);
+      return this.multiple && this.selected?.includes(item.value);
     },
     active(item) {
       return this.selected === item.value || this.checking(item);
     },
     open(item) {
       // this.check = this.checking(item);
-      return this.opens.includes(item.value);
+      return this.opens?.includes(item.value);
     },
     clickItem(item) {
       this.addIds(this.opens, item.value);

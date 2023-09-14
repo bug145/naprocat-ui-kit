@@ -1,13 +1,13 @@
 <template>
-  <nuxt-link
-    to="/"
+  <img
     class="logo"
+    :src="require('@/assets/icons/logo.svg')"
+    alt="logo"
     @click.native="clickLogo"
   />
 </template>
 
 <script>
-
 export default {
   name: 'NHeaderLogo',
   methods: {
@@ -28,18 +28,18 @@ export default {
     width: 180px;
     height: 26.06px;
     cursor: pointer;
-    background-image: url('@/assets/icons/logo.svg?data');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    border:none;
-    outline: none;
-    display: block;
+    //background-image: url('@/assets/icons/logo.svg?data');
+    //background-repeat: no-repeat;
+    //background-size: contain;
+    //background-position: center;
+    //border:none;
+    //outline: none;
+    //display: block;
     @include breakpoint.down(xl) {
-      width: 150px;
+      //width: 150px;
     }
     @include breakpoint.down(md) {
-      display: none;
+      //display: none;
     }
   }
 </style>
