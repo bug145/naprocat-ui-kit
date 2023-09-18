@@ -32,7 +32,7 @@
 
 <script>
 // eslint-disable-next-line import/no-unresolved
-import avatartIcon from '@/assets/icons/icon_avatar.svg?data';
+import avatartIcon from '../../../assets/icons/icon_avatar.svg?data';
 
 export default {
   name: 'NHeaderAvatar',
