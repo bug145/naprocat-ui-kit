@@ -3,14 +3,14 @@
     <img
       v-if="!burgerShow"
       class="burger__icon"
-      src="@/assets/icons/burger-menu.svg"
+      src="../../../assets/icons/burger-menu.svg"
       alt="burger"
       @click="burgerShow = true"
     />
     <img
       v-else
       class="burger__icon"
-      src="@/assets/icons/close.svg"
+      src="../../../assets/icons/close.svg"
       alt="burger"
       @click="burgerShow = false"
     />
