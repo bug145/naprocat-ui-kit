@@ -3,7 +3,7 @@
     <div class="city" @click="cityModal = true">
       <img
         class="city-icon"
-        src="@/assets/icons/map.svg?data"
+        src="../../../assets/icons/map.svg?data"
         alt=""
       />
       <div class="city-info">
