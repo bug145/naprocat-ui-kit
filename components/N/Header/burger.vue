@@ -1,88 +1,82 @@
 <template>
-  <div>
-    <img class="burger" src="../../../assets/icons/burger-menu.svg" alt="burger" />
+  <div class="burger">
+    <img
+      v-if="!burgerShow"
+      class="burger__icon"
+      src="../../../assets/icons/burger-menu.svg"
+      alt="burger"
+      @click="burgerShow = true"
+    />
+    <img
+      v-else
+      class="burger__icon"
+      src="../../../assets/icons/close.svg"
+      alt="burger"
+      @click="burgerShow = false"
+    />
+    <div class="burger__menu" :class="{'burger__menu-show' : burgerShow}">
+      <div class="burger__menu-item">
+        <img
+          class="burger__menu-icon"
+          src="../../../assets/icons/icon_heart.svg?data"
+          alt=""
+        />
+        <p class="burger__menu-text">
+          Избранный
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// eslint-disable-next-line import/no-unresolved
-import burgerIcon from '../../../assets/icons/burger-menu.svg?data';
-
 export default {
   name: 'NHeaderBurger',
-  // eslint-disable-next-line vue/no-unused-components
-  components: { burgerIcon },
+  data() {
+    return {
+      burgerShow: false,
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .burger {
-  width: 40px;
-  height: 40px;
-}
-.avatar{
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--primary-color);
-  border-radius: 50%;
-  cursor: pointer;
-  object-fit: cover;
-  @include breakpoint.down(md) {
-    width: 56px;
-    height: 56px;
+  &__icon{
+    width: 40px;
+    height: 40px;
   }
-  &__moderation{
-    width: 20px;
-    position: absolute;
-    top: -4px;
-    right: -4px;
-  }
-  &__none{
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    font-family: var(--font-rubik);
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: center;
-    color: #FFFFFF;
-  }
-  &__block{
-    position: relative;
-    &:hover{
-      .avatar__text{
-        color: var(--primary-color);
-      }
-      .avatar{
-        opacity: .9;
-      }
+  &__menu{
+    position: fixed;
+    top: 94px;
+    right: -70vw;
+    width: 70vw;
+    height: 100vh;
+    padding: 40px 22px;
+    background-color: #fff;
+    transition: .5s;
+    @media (max-width: 992px) {
+      top: 82px;
     }
   }
-  &__text{
-    max-width: 200px;
-    white-space: nowrap;
-    padding-top: 4px;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    text-align: center;
-    color: #333333;
-    transition: .2s;
-
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
-
-    overflow: hidden;
-    @include breakpoint.down(md) {
-      display: none;
-    }
+  &__menu-show{
+    right: 0;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
   }
-  &__load{
-    width: 46px;
-    height: 46px;
+  &__menu-close{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+  &__menu-item{
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &__menu-icon{
+    margin-right: 10px;
   }
 }
 </style>
