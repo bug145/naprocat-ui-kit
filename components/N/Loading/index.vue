@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'AtomsResult',
+  name: 'NLoading',
   props: {
     state: {
       type: String,

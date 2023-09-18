@@ -3,7 +3,7 @@
     class="logo"
     :src="require('../../../assets/icons/logo.svg')"
     alt="logo"
-    @click.native="clickLogo"
+    @click="clickLogo"
   />
 </template>
 
