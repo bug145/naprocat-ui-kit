@@ -1,12 +1,12 @@
 <template>
   <div>
-    <img class="burger" src="@/assets/icons/burger-menu.svg" alt="burger" />
+    <img class="burger" src="../../../assets/icons/burger-menu.svg" alt="burger" />
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line import/no-unresolved
-import burgerIcon from '@/assets/icons/burger-menu.svg?data';
+import burgerIcon from '../../../assets/icons/burger-menu.svg?data';
 
 export default {
   name: 'NHeaderBurger',

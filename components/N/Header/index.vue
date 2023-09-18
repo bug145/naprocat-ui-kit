@@ -2,32 +2,26 @@
   <div class="header">
     <div class="header__block">
       <n-header-logo />
-      <n-header-city v-if="city && !mobile" />
-      <input v-if="!mobile" type="text" class="header__center pr" />
-      <n-header-links v-if="!mobile" />
-      <n-header-avatar v-if="avatar && !mobile" />
-      <n-header-burger v-if="mobile" />
+      <n-header-city v-if="!compact" />
+      <input v-if="!compact" type="text" class="header__center pr" />
+      <n-header-links v-if="!compact" />
+      <n-header-avatar v-if="!compact && hasAuth" />
+      <n-header-burger v-if="compact" />
     </div>
   </div>
 </template>
 
 <script>
-import NHeaderLogo from '~/components/N/Header/logo.vue';
-import NHeaderCity from '~/components/N/Header/city.vue';
-import NHeaderLinks from '~/components/N/Header/links.vue';
-import NHeaderAvatar from '~/components/N/Header/avatar.vue';
+import get from 'lodash/get';
 
 export default {
   name: 'NHeader',
-  components: {
-    NHeaderAvatar, NHeaderLinks, NHeaderCity, NHeaderLogo,
-  },
-  props: {
-    city: Boolean,
-    avatar: Boolean,
-    mobile: {
-      type: Boolean,
-      default: true,
+  computed: {
+    hasAuth() {
+      return get(this.$flux, 'profile', false);
+    },
+    compact() {
+      return get(this.$device, 'isMobile', true);
     },
   },
 };
@@ -40,6 +34,9 @@ export default {
   max-width: 100vw;
   position: fixed;
   z-index: 4;
+  top: 0;
+  left: 0;
+  background: var(--header-background, white);
   @include breakpoint.down(md) {
     position: inherit;
   }
@@ -52,10 +49,6 @@ export default {
     justify-content: space-between;
     padding: 27px 0 23px 0;
     @include breakpoint.down(md) {
-      //display: grid;
-      //grid-gap: 20px;
-      //grid-template-columns: repeat(2, 1fr);
-      //grid-template-rows: repeat(2, 1fr);
       width: 100%;
       padding: 18px 22px 20px;
     }
@@ -65,7 +58,6 @@ export default {
   }
   &__bottom-load{
     height: 4px;
-    //width: 100%;
     background-color: var(--danger-color);
   }
   &--only-search[class] {

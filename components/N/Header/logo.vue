@@ -1,7 +1,7 @@
 <template>
   <img
     class="logo"
-    :src="require('@/assets/icons/logo.svg')"
+    :src="require('../../../assets/icons/logo.svg')"
     alt="logo"
     @click.native="clickLogo"
   />
