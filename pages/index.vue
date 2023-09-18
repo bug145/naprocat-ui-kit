@@ -1,18 +1,18 @@
 <template>
   <div>
-    <n-header city avatar />
+    <n-footer />
   </div>
 </template>
 
 <script>
-import NHeader from '~/components/N/Header/index.vue';
+import NFooter from '~/components/N/Footer/index.vue';
 
 export default {
   name: 'IndexPage',
-  components: { NHeader },
+  components: { NFooter },
   data() {
     return {
-      ids: [12],
+      ids: 234,
       items: [
         {
           title: 'Спорт и туризм',
