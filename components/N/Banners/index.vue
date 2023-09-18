@@ -27,9 +27,14 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import SsrCarousel from 'vue-ssr-carousel';
+import 'vue-ssr-carousel/index.css';
 
 export default {
   name: 'NBanners',
+  components: {
+    SsrCarousel,
+  },
   props: {
     carousel: {
       type: Boolean,

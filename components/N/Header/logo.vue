@@ -1,17 +1,18 @@
 <template>
-  <img
-    class="logo"
-    :src="require('../../../assets/icons/logo.svg')"
-    alt="logo"
-    @click="clickLogo"
-  />
+  <nuxt-link to="/" @click.native="clickHandler">
+    <img
+      class="logo"
+      :src="require('../../../assets/icons/logo.svg')"
+      alt="logo"
+    />
+  </nuxt-link>
 </template>
 
 <script>
 export default {
   name: 'NHeaderLogo',
   methods: {
-    clickLogo() {
+    clickHandler() {
       if (this.$route.path === '/') {
         window.scrollTo({
           top: 0,
@@ -28,18 +29,5 @@ export default {
     width: 180px;
     height: 26.06px;
     cursor: pointer;
-    //background-image: url('@/assets/icons/logo.svg?data');
-    //background-repeat: no-repeat;
-    //background-size: contain;
-    //background-position: center;
-    //border:none;
-    //outline: none;
-    //display: block;
-    @include breakpoint.down(xl) {
-      //width: 150px;
-    }
-    @include breakpoint.down(md) {
-      //display: none;
-    }
   }
 </style>
