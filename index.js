@@ -30,6 +30,7 @@ import {
   mapValues,
   map,
   flatten,
+  lowerCase,
 } from 'lodash';
 import {
   resolve,
@@ -52,6 +53,7 @@ export default async function UiInstaller(moduleOptions) {
   const componentsAll = readdirSync(componentsDir);
 
   let components = get(options, 'components', componentsAll);
+
   //----------------------------------------------------------------
 
   const layouts = get(options, 'layouts', {});
@@ -81,70 +83,74 @@ export default async function UiInstaller(moduleOptions) {
     return !includes(components, key);
   });
 
-  forEach(dependencies, async (dependency) => {
+  const componentDependencies = [];
+  forEach(dependencies, (dependency) => {
     const rootDir = resolve(__dirname, '../../');
-    const { default: res } = await import(resolve(rootDir, dependency));
-
-    components = concat(components, res);
+    componentDependencies.push(import(resolve(rootDir, dependency)));
   });
 
-  this.nuxt.hook('ready', async () => {
-    components.forEach(async (item) => {
-      const config = {
-        store: true,
-        router: true,
-        name: undefined,
-      };
+  const resolveComponentDependencies = await Promise.all(componentDependencies);
+  components = concat(components, flatten(map(resolveComponentDependencies, 'default')));
 
-      if (isString(item)) {
-        config.name = item;
-      } else {
-        const itemName = get(item, 'name', undefined);
-        const itemRouter = get(item, 'router', true);
-        const itemStore = get(item, 'store', true);
+  components.forEach(async (item) => {
+    const config = {
+      store: true,
+      router: true,
+      name: undefined,
+    };
 
-        config.name = itemName;
-        config.router = itemRouter;
-        config.store = itemStore;
-      }
+    if (isString(item)) {
+      config.name = item;
+    } else {
+      const itemName = get(item, 'name', undefined);
+      const itemRouter = get(item, 'router', true);
+      const itemStore = get(item, 'store', true);
 
-      const dirPath = join(componentsDir, `/${config.name}`);
-      const dir = readdirSync(dirPath);
-
-      this.nuxt.hook('components:dirs', (dirs) => {
-        dirs.push({
-          path: dirPath,
-          pattern: '*.vue',
-          prefix: `N${config.name}`,
-        });
-      });
-
-      if (config.store && arrHas(dir, 'store.js')) {
-        import(join(dirPath, '/store.js')).then(({ default: storeModule }) => {
-          const { dst: pluginDst } = this.addTemplate({
-            src: resolve(__dirname, 'plugins/register-store.js'),
-            options: {
-              name: config.name,
-              storeModule,
-            },
-          });
-
-          this.options.plugins.push(resolve(this.options.buildDir, pluginDst));
-        });
-      }
-    });
-
-    const mobileDetector = get(options, 'utils.mobile', true);
-    if (mobileDetector) {
-      const { dst: devicePluginDst } = this.addTemplate({
-        src: resolve(__dirname, 'plugins/mobile-detect.js'),
-      });
-      this.options.plugins.push(resolve(this.options.buildDir, devicePluginDst));
+      config.name = itemName;
+      config.router = itemRouter;
+      config.store = itemStore;
     }
 
-    const { dst: configPluginDst } = this.addTemplate({
-      src: resolve(__dirname, 'plugins/config.js'),
+    const dirPath = join(componentsDir, `/${config.name}`);
+    const dir = readdirSync(dirPath);
+
+    this.nuxt.hook('components:dirs', (dirs) => {
+      dirs.push({
+        path: dirPath,
+        pattern: '*.vue',
+        prefix: `N${config.name}`,
+      });
     });
-    this.options.plugins.push(resolve(this.options.buildDir, configPluginDst));
+
+    if (config.store && arrHas(dir, 'store.js')) {
+      const { dst: storeModule } = this.addTemplate({
+        src: join(dirPath, '/store.js'),
+        fileName: `${lowerCase(config.name)}.store.module.js`,
+      });
+
+      const { dst: pluginDst } = this.addTemplate({
+        src: resolve(__dirname, 'plugins/register-store.js'),
+        fileName: `${lowerCase(config.name)}.store.plugin.js`,
+        options: {
+          name: config.name,
+          module: storeModule,
+        },
+      });
+
+      this.options.plugins.push(resolve(this.options.buildDir, pluginDst));
+    }
   });
+
+  const mobileDetector = get(options, 'utils.mobile', true);
+  if (mobileDetector) {
+    const { dst: devicePluginDst } = this.addTemplate({
+      src: resolve(__dirname, 'plugins/mobile-detect.js'),
+    });
+    this.options.plugins.push(resolve(this.options.buildDir, devicePluginDst));
+  }
+
+  const { dst: configPluginDst } = this.addTemplate({
+    src: resolve(__dirname, 'plugins/config.js'),
+  });
+  this.options.plugins.push(resolve(this.options.buildDir, configPluginDst));
 }

@@ -1,10 +1,16 @@
 import { lowerCase } from "lodash";
 
-export default async ({ app, store }, inject) => {
+export default async (ctx, inject) => {
+  const { store } = ctx;
   const {
     name,
-    storeModule,
+    module,
   } = <%= serialize(options) %>;
 
-  store.registerModule(lowerCase(name), storeModule);
+  import('./' + module).then(({default: storeModule}) => {
+    store.registerModule(lowerCase(name), storeModule, {
+      preserveState: process.client,
+    });
+  })
+  
 };

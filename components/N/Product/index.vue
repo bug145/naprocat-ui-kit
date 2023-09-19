@@ -47,7 +47,7 @@
     <slot></slot>
     <img
       v-if="!pending"
-      src="@/assets/icons/favorites.svg"
+      src="../../../assets/icons/favorites.svg"
       alt=""
       class="product__favorites"
       @click="toggleFavorite"
@@ -61,13 +61,11 @@
 </template>
 
 <script>
-import NLoading from '~/components/N/Loading/index.vue';
 // eslint-disable-next-line import/no-unresolved
-import avatartModeration from '@/assets/icons/verify-avatar.svg?data';
+import avatartModeration from '../../../assets/icons/verify-avatar.svg?data';
 
 export default {
-  name: 'NProduct',
-  components: { NLoading },
+  name: 'NProductItem',
   props: {
     item: {
       type: [Array, Object],
@@ -75,7 +73,7 @@ export default {
         name: 'qwerty',
         slug: 1,
         // eslint-disable-next-line global-require
-        img: `${require('@/assets/icons/no-photo.svg')}`,
+        img: `${require('../../../assets/icons/no-photo.svg')}`,
         price: 5000,
         type: 'Час',
         identified: true,

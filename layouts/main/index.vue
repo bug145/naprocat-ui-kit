@@ -2,6 +2,7 @@
   <div class="layout layout--default">
     <n-header class="layout__header" />
     <nuxt class="layout__content" />
+    <n-footer class="layout__footer" />
   </div>
 </template>
 

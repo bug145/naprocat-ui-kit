@@ -20,21 +20,21 @@
           <div class="footer__right-acquiring-item">
             <img
               class="all"
-              src="@/assets/icons/footer/epay-logo.svg?data"
+              src="../../../assets/icons/footer/epay-logo.svg?data"
               alt=""
             />
           </div>
           <div class="footer__right-acquiring-item">
             <img
               class="all"
-              src="@/assets/icons/footer/mastercard-logo.svg?data"
+              src="../../../assets/icons/footer/mastercard-logo.svg?data"
               alt=""
             />
           </div>
           <div class="footer__right-acquiring-item">
             <img
               class="all"
-              src="@/assets/icons/footer/visa-logo.svg?data"
+              src="../../../assets/icons/footer/visa-logo.svg?data"
               alt=""
             />
           </div>
