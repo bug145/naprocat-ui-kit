@@ -25,8 +25,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      apiItems: 'recommended/items',
+    ...mapGetters('recommended', {
+      apiItems: 'pageItems',
     }),
     adjustedItems() {
       return this.connect ? this.apiItems : this.items;

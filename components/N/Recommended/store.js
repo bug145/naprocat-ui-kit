@@ -35,15 +35,15 @@ const mutations = {
     state.pending = payload;
   },
   SET_ITEMS(state, payload) {
-    const page = payload?.current_page;
+    const {meta, data} = payload;
+    const page = meta.current_page;
     const index = page - 1;
-    const { data } = payload;
-    const temp = JSON.parse(JSON.stringify(state.items));
 
     state.currentPage = page;
-    state.itemsInPage = payload.per_page;
-    state.totalPage = payload.last_page;
+    state.itemsInPage = meta.per_page;
+    state.totalPage = meta.last_page;
 
+    const temp = JSON.parse(JSON.stringify(state.items));
     set(temp, index, data);
     state.items = temp;
   },
@@ -68,7 +68,6 @@ const actions = {
 };
 
 export default {
-  namespaced: true,
   state,
   actions,
   mutations,

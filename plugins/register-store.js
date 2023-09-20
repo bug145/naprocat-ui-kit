@@ -1,16 +1,12 @@
-import { lowerCase } from "lodash";
+/* eslint-disable import/no-unresolved */
+import lowerCase from 'lodash/lowerCase';
+import storeModule from './<%= options.module %>';
 
-export default async (ctx, inject) => {
+export default async (ctx) => {
   const { store } = ctx;
-  const {
-    name,
-    module,
-  } = <%= serialize(options) %>;
+  const moduleName = lowerCase('<%= options.name %>');
 
-  import('./' + module).then(({default: storeModule}) => {
-    store.registerModule(lowerCase(name), storeModule, {
-      preserveState: process.client,
-    });
-  })
-  
+  store.registerModule(moduleName, { ...storeModule, namespaced: true }, {
+    preserveState: store.hasModule(moduleName) || process.client,
+  });
 };
