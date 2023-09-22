@@ -66,9 +66,5 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(config) {
-      // eslint-disable-next-line no-param-reassign
-      config.resolve.alias['node-fetch-native'] = require.resolve('node-fetch');
-    },
   },
 };
