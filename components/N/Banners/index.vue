@@ -2,15 +2,17 @@
   <div>
     <ssr-carousel
       v-if="carousel"
-      :slides-per-page="1"
+      :slides-per-page="slidesPerPage"
       :gutter="10"
       :peek-right="40"
+      :overflow-visible="fullWidth"
       class="carousel"
     >
       <n-banner-item
         v-for="item in adjustedItems"
         :key="item.id"
         :item="item"
+        :variant="variant"
         class="carousel__item"
       />
     </ssr-carousel>
@@ -44,9 +46,22 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    variant: {
+      type: String,
+      default: 'primary',
+      validator: (variant) => [
+        'primary',
+        'secondary',
+      ].includes(variant),
+    },
     connect: {
       type: Boolean,
       default: true,
+    },
+    fullWidth: {
+      // works with carousel
+      type: Boolean,
+      default: false,
     },
   },
   async fetch() {
@@ -60,6 +75,13 @@ export default {
     }),
     adjustedItems() {
       return this.connect ? this.apiItems : this.items;
+    },
+    slidesPerPage() {
+      const slides = {
+        primary: 1,
+        secondary: 3,
+      };
+      return slides[this.variant];
     },
   },
   methods: {

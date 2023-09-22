@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link class="banner" :to="goTo(item)">
+  <nuxt-link class="banner" :class="`banner--${variant}`" :to="goTo(item)">
     <img
       class="banner__bg"
       loading="lazy"
@@ -17,9 +17,8 @@
       <p class="banner__price">
         {{ item.price }}
       </p>
-      день
+      в день
     </n-badge>
-    <!--    <atoms-direction class="banner__rent" :text="`${$t('rent')}`" />-->
   </nuxt-link>
 </template>
 
@@ -30,6 +29,14 @@ export default {
     item: {
       type: [Object, Array],
       default: () => undefined,
+    },
+    variant: {
+      type: String,
+      default: 'primary',
+      validator: (variant) => [
+        'primary',
+        'secondary',
+      ].includes(variant),
     },
   },
   methods: {
@@ -121,6 +128,11 @@ export default {
     user-select: none;
     pointer-events: none;
     object-position: bottom right;
+  }
+
+  &--secondary {
+    height: 162px;
+    border-radius: 16px;
   }
 }
 </style>

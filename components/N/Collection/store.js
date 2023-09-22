@@ -35,7 +35,7 @@ const mutations = {
     state.pending = payload;
   },
   SET_ITEMS(state, payload) {
-    const {meta, data} = payload;
+    const { meta, data } = payload;
     const page = meta.current_page;
     const index = page - 1;
 
@@ -57,7 +57,7 @@ const actions = {
         page: state.currentPage,
         city_id: 1,
         'filters[in_random]': 1,
-        'filters[per_page]': 12,
+        'filters[per_page]': 8,
       },
     }).then((response) => {
       commit('SET_ITEMS', response);

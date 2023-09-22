@@ -1,12 +1,11 @@
 <template>
   <div class="items__wrapper">
     <div class="items__header">
-      <p class="items__label">
-        {{ label }}
-      </p>
+      <n-section-header label="Хиты аренды" link="Смотреть все" :href="{name: 'index'}" />
+      <n-radio-buttons :items="filters" @input="fetch" />
     </div>
     <div class="items__banner">
-      <img class="temp-banner" src="http://placekitten.com/200/300" />
+      <n-ad-vertical />
     </div>
     <div class="items__body">
       <ssr-carousel :slides-per-page="4" class="carousel" :gutter="16">
@@ -24,70 +23,59 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
 import SsrCarousel from 'vue-ssr-carousel';
 import 'vue-ssr-carousel/index.css';
-import { chunk } from 'lodash';
+import chunk from 'lodash/chunk';
 
 export default {
-  name: 'NRecommended',
+  name: 'NBriefcase',
   components: {
     SsrCarousel,
   },
   props: {
     label: {
       type: String,
-      default: 'Рекомендации',
+      default: 'Коллекция',
     },
     items: {
       type: Array,
       default: () => [],
     },
-    connect: {
-      type: Boolean,
-      default: true,
+    filters: {
+      type: Array,
+      default: () => [],
     },
-  },
-  async fetch() {
-    if (this.connect) {
-      await this.fetch();
-    }
+    banner: {
+      type: Object,
+      default: () => ({}),
+    },
+    filter: {
+      type: [String, Number, Boolean],
+      default: () => (undefined),
+    },
   },
   computed: {
-    ...mapGetters('recommended', {
-      apiItems: 'pageItems',
-    }),
     adjustedItems() {
-      const items = this.connect ? this.apiItems : this.items;
-      return chunk(items, 2);
+      return chunk(this.items, 2, true);
     },
-  },
-  methods: {
-    ...mapActions({
-      fetch: 'recommended/fetch',
-    }),
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.temp-banner {
-  width: 100%;
-  display: block;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-}
-
 .items {
   &__wrapper {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 16px;
+    grid-column-gap: 16px;
+    grid-row-gap: 24px;
   }
 
   &__header {
     grid-area: 1 / 1 / 2 / 6;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 16px;
   }
   &__banner {
     grid-area: 2 / 1 / 4 / 2;

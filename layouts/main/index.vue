@@ -29,7 +29,12 @@ export default {
     }
   }
   &__content {
-    max-width: 1024px;
+    max-width: 1280px;
+    :deep() {
+      & > * {
+        margin-bottom: 32px;
+      }
+    }
   }
 }
 </style>

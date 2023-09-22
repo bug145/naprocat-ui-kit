@@ -180,7 +180,7 @@ export default {
   outline-color: var(--primary-color, #4daaff);
   outline-style: solid;
   outline-width: 0;
-  border-radius: 8px;
+  border-radius: 12px;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -250,27 +250,27 @@ export default {
   &--size {
     line-height: 1;
     &--lg {
-      min-height: 60px;
-      padding: 18px;
-      font-size: 18px;
-    }
-
-    &--md {
-      min-height: 46px;
-      padding: 16px;
+      min-height: 48px;
+      padding: 12px 16px;
       font-size: 16px;
     }
 
-    &--sm {
+    &--md {
       min-height: 40px;
+      padding: 12px 16px;
       font-size: 14px;
-      padding: 13px;
+    }
+
+    &--sm {
+      min-height: 32px;
+      font-size: 10px;
+      padding: 8px 16px;
     }
 
     &--xs {
-      min-height: 29px;
-      font-size: 14px;
-      padding: 6px 14px;
+      min-height: 24px;
+      font-size: 10px;
+      padding: 4px 16px;
     }
   }
 
@@ -279,14 +279,15 @@ export default {
       background: #4daaff;
       color: #ffffff;
       &-outlined {
-        border: 1px solid var(--, #F2F2F2);
-        background: none;
-        color: #333;
+        border: 1.5px solid var(--primary-500, #24BA96);
+        background: var(--white, #FFF);
+        color: var(--primary-500, var(--text-inverted, #24BA96));
+        font-weight: 700;
       }
     }
 
     &--secondary {
-      background: #f8f8f8;
+      background: var(--white, #FFF);
       color: #333;
       &-outlined {
         border: 1px solid var(--, #F2F2F2);
