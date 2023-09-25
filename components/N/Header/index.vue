@@ -37,9 +37,6 @@ export default {
   top: 0;
   left: 0;
   background: var(--header-background, white);
-  @include breakpoint.down(md) {
-    position: inherit;
-  }
   &__block{
     width: 100%;
     max-width: 1024px;

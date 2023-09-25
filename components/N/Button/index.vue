@@ -13,10 +13,10 @@
     </div>
 
     <div class="n-button__content">
-      <atoms-result
+      <n-loading
         v-if="pending"
         size="xs"
-        :variant="paddingBlue ? 'blue' : 'white'"
+        :variant="paddingBlue ? 'primary' : 'secondary'"
       />
       <slot v-else-if="hasDefaultSlot"></slot>
       <span v-else-if="fallback">{{ fallback }}</span>
@@ -148,7 +148,7 @@ export default {
   },
   methods: {
     clickHandler() {
-      if (!this.prevent && !this.disabled) {
+      if (!this.prevent && !this.disabled && !this.pending) {
         this.$emit('click');
       }
     },
@@ -276,12 +276,12 @@ export default {
 
   &--variant {
     &--primary {
-      background: #4daaff;
+      background: var(--color-primary, royalblue);
       color: #ffffff;
       &-outlined {
-        border: 1.5px solid var(--primary-500, #24BA96);
+        border: 1.5px solid var(--color-primary, royalblue);
         background: var(--white, #FFF);
-        color: var(--primary-500, var(--text-inverted, #24BA96));
+        color: var(--color-primary, var(--text-inverted, #24BA96));
         font-weight: 700;
       }
     }

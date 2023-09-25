@@ -1,6 +1,6 @@
 {
   "name": "flux-ui-kit",
-  "version": "1.1.9",
+  "version": "1.1.11",
   "private": false,
   "scripts": {
     "dev": "nuxt",

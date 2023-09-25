@@ -85,6 +85,9 @@ export default {
       justify-content: center;
       transition: .2s;
       background: white;
+      @include breakpoint.down(md) {
+        height: 130px;
+      }
     }
     &__info {
       height: 120px;
@@ -94,8 +97,9 @@ export default {
       position: relative;
       z-index: 1;
       @include breakpoint.down(md) {
-        height: 60px;
-        padding: 8px 10px 12px;
+        height: 96px;
+        padding: 8px;
+        padding-bottom: 28px;
       }
     }
     &__name {
@@ -107,6 +111,10 @@ export default {
       line-clamp: 2;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      @include breakpoint.down(md) {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
     }
     &__price {
       font-size: 14px;
@@ -114,6 +122,10 @@ export default {
       color: var(--neutral-lighter-text-color, #6D758F);
       margin-bottom: 8px;
       font-size: 500;
+      @include breakpoint.down(md) {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
     }
     &__cost {
       color: var(--primary-secondary-color, #3E4157);
@@ -121,6 +133,9 @@ export default {
       font-weight: 800;
       line-height: 24px;
       margin-right: 4px;
+      @include breakpoint.down(md) {
+        font-size: 16px;
+      }
     }
     &__city {
       font-size: 14px;
@@ -130,6 +145,10 @@ export default {
       bottom: 16px;
       white-space: nowrap;
       color: var(--secondary-400, #6D758F);
+      @include breakpoint.down(md) {
+        bottom: 8px;
+        font-size: 12px;
+      }
     }
   }
   .row{

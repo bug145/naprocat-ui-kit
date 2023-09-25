@@ -3,9 +3,11 @@
     <ssr-carousel
       v-if="carousel"
       :slides-per-page="slidesPerPage"
-      :gutter="10"
-      :peek-right="40"
-      :overflow-visible="fullWidth"
+      :gutter="slidesGap"
+      :peek-left="slidesPeek"
+      :peek-right="slidesPeek"
+      loop
+      :overflow-visible="overflowVisible"
       class="carousel"
     >
       <n-banner-item
@@ -77,11 +79,32 @@ export default {
       return this.connect ? this.apiItems : this.items;
     },
     slidesPerPage() {
+      if (this.$device.isMobile) {
+        return 1;
+      }
       const slides = {
         primary: 1,
         secondary: 3,
       };
       return slides[this.variant];
+    },
+    overflowVisible() {
+      if (this.$device.isMobile) {
+        return false;
+      }
+      return this.fullWidth;
+    },
+    slidesGap() {
+      if (this.$device.isMobile) {
+        return 8;
+      }
+      return 16;
+    },
+    slidesPeek() {
+      if (this.$device.isMobile) {
+        return 16;
+      }
+      return 0;
     },
   },
   methods: {

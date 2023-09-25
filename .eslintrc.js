@@ -104,7 +104,7 @@ module.exports = {
       {
         ignoreWhenNoAttributes: true,
         ignoreWhenEmpty: true,
-        ignores: ['b', 'del', 'em', 'i', 's', 'small', 'span', 'strong', 'sub', 'sup', 'u'],
+        ignores: ['b', 'del', 'em', 'i', 's', 'small', 'span', 'strong', 'sub', 'sup', 'u', 'p'],
       },
     ],
     'vue/max-len': [

@@ -1,5 +1,5 @@
 import {
-  take, flatten, get, set,
+  flatten, forEach, get, set, take,
 } from 'lodash';
 
 const state = () => ({
@@ -19,6 +19,7 @@ const getters = {
   currentPage: (state) => state.currentPage,
   totalPage: (state) => state.totalPage,
   pending: (state) => state.pending,
+  isLastPage: (state) => state.totalPage <= state.currentPage,
 };
 
 const mutations = {
@@ -57,7 +58,7 @@ const actions = {
         page: state.currentPage,
         city_id: 1,
         'filters[in_random]': 1,
-        'filters[per_page]': 13,
+        'filters[per_page]': 10,
       },
     }).then((response) => {
       commit('SET_ITEMS', response);
@@ -65,11 +66,18 @@ const actions = {
       commit('PENDING', false);
     });
   },
+  getNextPage({state, commit, dispatch}) {
+    if(state.isLastPage) {
+      return;
+    }
+    commit('SET_CURRENT_PAGE', state.currentPage + 1);
+    dispatch('fetch');
+  },
 };
 
 export default {
   state,
-  actions,
-  mutations,
   getters,
-};
+  mutations,
+  actions,
+}

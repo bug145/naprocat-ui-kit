@@ -1,5 +1,13 @@
 <template>
-  <div class="radio__wrapper">
+  <ssr-carousel
+    v-if="items"
+    :key="items.length"
+    class="radio__wrapper"
+    :slides-per-page="null"
+    :gutter="8"
+    :peek-left="16"
+    :peek-right="16"
+  >
     <n-button
       v-for="item in items"
       :key="item.value"
@@ -10,11 +18,17 @@
     >
       {{ item.text }}
     </n-button>
-  </div>
+  </ssr-carousel>
 </template>
 <script>
+import SsrCarousel from 'vue-ssr-carousel';
+import 'vue-ssr-carousel/index.css';
+
 export default {
   name: 'RadioButtons',
+  components: {
+    SsrCarousel,
+  },
   props: {
     value: {
       type: [String, Number, Boolean, Array, Object],
@@ -51,8 +65,8 @@ export default {
 <style scoped lang="scss">
 .radio {
   &__wrapper {
-    display: flex;
-    grid-gap: 16px;
+    // display: flex;
+    // grid-gap: 16px;
   }
   &__button[class] {
     font-size: 14px;
