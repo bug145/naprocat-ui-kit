@@ -1,5 +1,5 @@
 <template>
-  <div class="product" :class="`product--${variant}`">
+  <div :key="item.slug" class="product" :class="`product--${variant}`">
     <nuxt-link
       v-if="item"
       class="product__link"

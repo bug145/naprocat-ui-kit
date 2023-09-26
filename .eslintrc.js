@@ -132,6 +132,7 @@ module.exports = {
       },
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-unresolved': [2, { ignore: ['\\?'] }],
   },
   overrides: [
     {

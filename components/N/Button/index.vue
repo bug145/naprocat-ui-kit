@@ -177,9 +177,6 @@ export default {
   position: relative;
   border: none;
   cursor: pointer;
-  outline-color: var(--primary-color, #4daaff);
-  outline-style: solid;
-  outline-width: 0;
   border-radius: 12px;
   box-sizing: border-box;
   display: flex;
@@ -198,10 +195,6 @@ export default {
   &__content {
     display: flex;
     width: 100%;
-  }
-
-  &:hover:not([disabled]) {
-    outline-width: 2px;
   }
 
   &--fallback {
@@ -289,6 +282,9 @@ export default {
     &--secondary {
       background: var(--white, #FFF);
       color: #333;
+      &:hover:not([disabled]) {
+        color: var(--color-primary, royalblue);
+      }
       &-outlined {
         border: 1px solid var(--, #F2F2F2);
         background: var(--gray, #F8F8F8);

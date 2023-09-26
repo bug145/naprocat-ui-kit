@@ -47,6 +47,7 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/style-resources',
     'vue-ssr-carousel/nuxt',
+    '@nuxtjs/svg',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
